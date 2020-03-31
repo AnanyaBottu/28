@@ -15,7 +15,6 @@ function setup(){
     var canvas = createCanvas(1200,400);
     engine = Engine.create();
     world = engine.world;
-
     
     ground = new Ground(600,height,1200,20);
     platform = new Ground(150, 305, 300, 170);
@@ -34,11 +33,11 @@ function setup(){
     box5 = new Box(810,160,70,70);
     log4 = new Log(760,120,150, PI/7);
     log5 = new Log(870,120,150, -PI/7);
-    log=new Log(230,180,80,PI/2);
+    //log=new Log(230,180,80,PI/2);//
 
     bird = new Bird(100,100);
     console.log (bird);
-    cons=new Chain(bird.body,log.body);
+    cons=new SlingShot(bird.body,{x:200,y:100});
     
 
 
@@ -68,8 +67,15 @@ function draw(){
     bird.display();
     platform.display();
     cons.display();
-    log.display();
+    //log.display();//
+    
     
 
 
+}
+function mouseDragged(){
+   Matter.Body.setPosition(bird.body,{x:mouseX,y:mouseY})
+}
+function mouseReleased(){
+   cons.Release();
 }
